@@ -1,0 +1,40 @@
+package ActiveMq;
+
+public class TestProducter {
+    public static void main(String[] args) {
+        Producter producter = new Producter();
+        producter.init();
+        TestProducter testProducter = new TestProducter();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        new Thread(testProducter.new ProcudterMq(producter)).start();
+        new Thread(testProducter.new ProcudterMq(producter)).start();
+        new Thread(testProducter.new ProcudterMq(producter)).start();
+        new Thread(testProducter.new ProcudterMq(producter)).start();
+        new Thread(testProducter.new ProcudterMq(producter)).start();
+
+    }
+
+    private class ProcudterMq implements Runnable {
+
+        Producter producter;
+
+        public ProcudterMq(Producter producter) {
+            this.producter = producter;
+        }
+
+        @Override
+        public void run() {
+            producter.sendMessage("Jaycekon-MQ");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
